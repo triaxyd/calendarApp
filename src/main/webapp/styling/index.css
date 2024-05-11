@@ -1,0 +1,142 @@
+main{
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+body {
+    background: #F0E8E1;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for the error message bubble */
+.error-message-bubble {
+    position: fixed; /* Position */
+    top: 10%; /* Adjust to vertically center the bubble */
+    left: 50%; /* Adjust to horizontally center the bubble */
+    transform: translate(-50%, -50%);
+    background-color: #ffcccc; /* Background color */
+    color: #dd5555; /* Text color */
+    padding: 15px 20px; /* Padding around text */
+    border-radius: 10px; /* Border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    z-index: 9999; /* Ensure the bubble appears on top of other content */
+    opacity: 0; /* Initially hide the bubble */
+    transition: opacity 0.3s ease-in-out; /* Add transition for smooth appearance */
+    user-select: none; /* Prevent text selection */
+    -webkit-user-drag: none; /* Prevent dragging on Safari */
+    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+}
+
+#usernameField,
+#passwordField{
+    background: #F0E8E1;
+    border: none;
+    border-bottom: 1px solid #222222;
+    border-radius: 0;
+    width: 100%;
+    margin: 0 auto;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+
+.welcome-text h1{
+    color: #927C67;
+    user-select: none; /* Prevent text selection */
+    -webkit-user-drag: none; /* Prevent dragging on Safari */
+    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+}
+
+.welcome-text h2{
+    color:#BDCEB6;
+    user-select: none; /* Prevent text selection */
+    -webkit-user-drag: none; /* Prevent dragging on Safari */
+    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+}
+
+.arrow-circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #BDCEB6;
+    color: #55473B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.arrow-circle-btn:hover {
+    background-color: #66584C;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid #F0E8E1;
+    color: #F0E8E1;
+}
+
+
+img,p{
+    user-select: none; /* Prevent text selection */
+    -webkit-user-drag: none; /* Prevent dragging on Safari */
+    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+}
+
+
+
+
+
+@media (max-width: 576px) {
+    .img-fluid {
+        width: 200px; /* Adjust the width as needed for phones */
+    }
+}
+
+/* Small devices (landscape phones) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .img-fluid {
+        width: 250px; /* Adjust the width as needed for landscape phones */
+    }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .img-fluid {
+        width: 300px; /* Adjust the width as needed for tablets */
+    }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .img-fluid {
+        width: 350px; /* Adjust the width as needed for desktops */
+    }
+}
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) {
+    .img-fluid {
+        width: 400px; /* Adjust the width as needed for large desktops */
+    }
+}
+
+
