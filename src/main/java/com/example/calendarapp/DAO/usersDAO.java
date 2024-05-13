@@ -1,10 +1,24 @@
 package com.example.calendarapp.DAO;
+import com.example.calendarapp.users.User;
+
 
 public class usersDAO {
 
-    public static void validateUser(String username, String password) {
+
+    public static boolean searchUser(String username) {
         // access database and search for user
-        // if found, return user object
+        // if found, return true
+        return true;
+    }
+
+    public static boolean validateUser(String username, String password) {
+        // authenticate user based on credentials
+        return true;
+    }
+
+    public static User returnUser(String username){
+        // find user based on username and return his object
+        return null;
     }
 
 

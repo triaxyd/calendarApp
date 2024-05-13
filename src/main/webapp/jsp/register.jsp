@@ -17,7 +17,7 @@
         <div id="error-message-bubble" class="error-message-bubble">Oops! Something went wrong.</div>
         <div class="welcome-text">
             <h1 class="display-4">Welcome to Slothy!</h1>
-            <h2 class="display-5">Please Create an Account</h2>
+            <h2 class="display-5">Create Account</h2>
         </div>
         <form id="register-form" method="post" action="register-servlet" class="mt-5 text-center">
             <div class="mb-4">

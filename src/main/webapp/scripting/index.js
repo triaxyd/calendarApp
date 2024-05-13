@@ -13,8 +13,8 @@ function showErrorBubble() {
 // test form validation
 document.getElementById('login-form').addEventListener('submit', function(event) {
     let isValid = true;
-    let usernameField = document.getElementById("usernameField").value; // Get the value of the username field
-    let passwordField = document.getElementById("passwordField").value; // Get the value of the password field
+    let usernameField = document.getElementById("usernameField").value;
+    let passwordField = document.getElementById("passwordField").value;
 
 
     if (usernameField.trim() === '' || usernameField.length < 5) {

@@ -18,23 +18,23 @@ body {
     align-items: center;
 }
 
-/* Style for the error message bubble */
+/* error message bubble */
 .error-message-bubble {
-    position: fixed; /* Position */
-    top: 10%; /* Adjust to vertically center the bubble */
-    left: 50%; /* Adjust to horizontally center the bubble */
+    position: fixed;
+    top: 10%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffcccc; /* Background color */
-    color: #dd5555; /* Text color */
-    padding: 15px 20px; /* Padding around text */
-    border-radius: 10px; /* Border radius for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-    z-index: 9999; /* Ensure the bubble appears on top of other content */
-    opacity: 0; /* Initially hide the bubble */
-    transition: opacity 0.3s ease-in-out; /* Add transition for smooth appearance */
-    user-select: none; /* Prevent text selection */
-    -webkit-user-drag: none; /* Prevent dragging on Safari */
-    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+    background-color: #ffcccc;
+    color: #dd5555;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 #usernameField,
@@ -54,16 +54,16 @@ body {
 
 .welcome-text h1{
     color: #927C67;
-    user-select: none; /* Prevent text selection */
-    -webkit-user-drag: none; /* Prevent dragging on Safari */
-    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 .welcome-text h2{
     color:#BDCEB6;
-    user-select: none; /* Prevent text selection */
-    -webkit-user-drag: none; /* Prevent dragging on Safari */
-    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 .arrow-circle-btn {
@@ -96,9 +96,9 @@ body {
 
 
 img,p{
-    user-select: none; /* Prevent text selection */
-    -webkit-user-drag: none; /* Prevent dragging on Safari */
-    -webkit-touch-callout: none; /* Prevent callout on long-press on Safari */
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 
@@ -107,35 +107,35 @@ img,p{
 
 @media (max-width: 576px) {
     .img-fluid {
-        width: 200px; /* Adjust the width as needed for phones */
+        width: 200px;
     }
 }
 
 /* Small devices (landscape phones) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     .img-fluid {
-        width: 250px; /* Adjust the width as needed for landscape phones */
+        width: 250px;
     }
 }
 
 /* Medium devices (tablets) */
 @media (min-width: 768px) and (max-width: 991.98px) {
     .img-fluid {
-        width: 300px; /* Adjust the width as needed for tablets */
+        width: 300px;
     }
 }
 
 /* Large devices (desktops) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .img-fluid {
-        width: 350px; /* Adjust the width as needed for desktops */
+        width: 350px;
     }
 }
 
 /* Extra large devices (large desktops) */
 @media (min-width: 1200px) {
     .img-fluid {
-        width: 400px; /* Adjust the width as needed for large desktops */
+        width: 400px;
     }
 }
 
