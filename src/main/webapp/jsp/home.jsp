@@ -1,3 +1,8 @@
+<%
+
+
+%>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -13,23 +18,12 @@
     <link rel="icon" type="image/png" href="../images/slothyWaving.png">
 </head>
 <body>
-<main class="container main-container">
-    <div class="welcome-text">
-        <h1 class="display-4 animated-text">Welcome to your Calendar</h1>
-    </div>
-</main>
+    <main class="container main-container">
+        <div class="welcome-text hidden">
+            <h1 class="display-4">Welcome, <%= session.getAttribute("username") %></h1>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../scripting/home.js"></script>
-<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-<script>
-    ScrollReveal().reveal('.welcome-text', {
-        delay: 200,
-        duration: 1000,
-        origin: 'bottom',
-        distance: '40px',
-        easing: 'ease',
-        interval: 200
-    });
-</script>
 </body>
 </html>

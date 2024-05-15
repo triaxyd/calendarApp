@@ -14,10 +14,24 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
+.welcome-text {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s, transform 1s;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.welcome-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .welcome-text h1{
     color: #927C67;
@@ -25,6 +39,8 @@ body {
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
 }
+
+
 
 
 
