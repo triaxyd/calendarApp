@@ -21,10 +21,10 @@
         </div>
         <form id="login-form" method="post" action="login-servlet" class="mt-5 text-center">
             <div class="mb-4">
-                <input type="text" id="usernameField" name="usernameField" class="form-control" placeholder="username">
+                <input type="text" id="usernameField" name="usernameField" class="form-control" placeholder="username" maxlength="12">
             </div>
             <div class="mb-4">
-                <input type="password" id="passwordField" name="passwordField" class="form-control" placeholder="password">
+                <input type="password" id="passwordField" name="passwordField" class="form-control" placeholder="password" maxlength="20">
             </div>
             <button type="submit" class="arrow-circle-btn" id="submitBtn">
                 <span class="arrow"></span>

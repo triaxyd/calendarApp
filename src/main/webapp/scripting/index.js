@@ -17,12 +17,12 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     let passwordField = document.getElementById("passwordField").value;
 
 
-    if (usernameField.trim() === '' || usernameField.length < 5) {
+    if (usernameField.trim() === '' || usernameField.length < 5 || usernameField.length > 12) {
         isValid = false;
     }
 
 
-    if (passwordField.trim() === '' || passwordField.length < 5) {
+    if (passwordField.trim() === '' || passwordField.length < 5 || passwordField.length > 20) {
         isValid = false;
     }
 

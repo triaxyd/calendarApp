@@ -21,10 +21,10 @@
         </div>
         <form id="register-form" method="post" action="register-servlet" class="mt-5 text-center">
             <div class="mb-4">
-                <input type="text" id="usernameField" class="form-control" placeholder="Enter a Username">
+                <input type="text" id="usernameField" class="form-control" placeholder="Enter a Username" maxlength="12">
             </div>
             <div class="mb-4">
-                <input type="password" id="passwordField" class="form-control" placeholder="Enter a Password">
+                <input type="password" id="passwordField" class="form-control" placeholder="Enter a Password" maxlength="20">
             </div>
             <div class="mb-4">
                 <input type="number" id="ageField" class="form-control" placeholder="Enter your Age" min="15" max="99">

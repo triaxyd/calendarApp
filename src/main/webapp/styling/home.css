@@ -20,7 +20,7 @@ body {
 
 .welcome-text {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(100px);
     transition: opacity 1s, transform 1s;
     padding: 20px;
     margin-bottom: 20px;

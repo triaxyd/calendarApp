@@ -18,12 +18,12 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     let ageField = document.getElementById("ageField").value;
 
 
-    if (usernameField.trim() === '' || usernameField.length < 5) {
+    if (usernameField.trim() === '' || usernameField.length < 5 || usernameField.length > 12) {
         isValid = false;
     }
 
 
-    if (passwordField.trim() === '' || passwordField.length < 5) {
+    if (passwordField.trim() === '' || passwordField.length < 5 || usernameField.length > 20) {
         isValid = false;
     }
 
