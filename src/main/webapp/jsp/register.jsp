@@ -35,7 +35,7 @@
         </form>
         <div class="row mt-5">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12">
-                <img src="../images/slothyMain.png" class="img-fluid" id="slothy-main" alt="Slothy Image">
+                <img src="../images/slothyAgenda.png" class="img-fluid" id="slothy-main" alt="Slothy Image">
                 <p class="text-center mt-3">Already have an account? <a href="../index.jsp" style="color: #55473B">Login</a></p>
             </div>
         </div>
