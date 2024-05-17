@@ -14,11 +14,19 @@
 </head>
 <body>
     <main class="container main-container">
+        <input type="hidden" id="usernameHidden" value="<%=session.getAttribute("username")%>">
         <div class="welcome-text hidden">
-            <h1 class="display-4">Welcome, <%= session.getAttribute("username") %></h1>
+            <h1 class="display-4"><span id="type-writing"></span></h1>
+        </div>
+
+        <div class="container">
+            <div class="calendar">
+
+            </div>
         </div>
     </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../scripting/home.js"></script>
+
 </body>
 </html>
