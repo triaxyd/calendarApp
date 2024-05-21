@@ -22,7 +22,6 @@ public class LoginServlet extends HttpServlet {
         if(usersDAO.validateUser(username, password)){
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            session.setAttribute("password", password);
 
             //authentication process
             response.sendRedirect( request.getContextPath()+"/jsp/home.jsp");
