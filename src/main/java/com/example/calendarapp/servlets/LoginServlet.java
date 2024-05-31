@@ -19,12 +19,14 @@ public class LoginServlet extends HttpServlet {
 
         // call userDAO to authenticate the user
 
-        if(usersDAO.validateUser(username, password)){
+        if (usersDAO.validateUser(username, password)) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
 
             //authentication process
-            response.sendRedirect( request.getContextPath()+"/jsp/home.jsp");
+            response.sendRedirect(request.getContextPath() + "/jsp/home.jsp");
+        } else {
+            response.sendRedirect(request.getContextPath());
         }
     }
 

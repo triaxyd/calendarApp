@@ -15,10 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
             //show the button and event list after the animation
             const addButton = document.getElementById('add-event-button');
             const eventsContainer = document.querySelector('.events-container');
+            const slothyMain = document.getElementById('slothy-main');
             setTimeout(() => {
                 addButton.classList.add('show');
                 eventsContainer.classList.add('show');
             }, 1000);
+            setTimeout(() => {
+                slothyMain.classList.add('show');
+            },2000);
         }
     }
     typeWriter();

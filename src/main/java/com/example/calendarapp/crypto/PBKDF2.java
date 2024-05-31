@@ -42,7 +42,6 @@ public class PBKDF2 {
         for(int i = 0; i < passwordHash.length && i < testHash.length; i++)
         {
             diff |= passwordHash[i] ^ testHash[i];
-            if(diff == 1) break;
         }
         return diff == 0;
     }

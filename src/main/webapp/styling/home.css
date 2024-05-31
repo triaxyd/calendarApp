@@ -48,7 +48,7 @@ body {
     background: #927C67;
     border: none;
     position: absolute;
-    top: 6rem;
+    top: 7rem;
     opacity: 0;
     transition: opacity 1s;
 }
@@ -86,11 +86,25 @@ body {
 
 .event-item {
     background: #ffffff;
-    margin: 0.5rem 0;
-    padding: 0.75rem;
+    margin: 0.75rem 0;
+    padding: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 }
+
+
+#slothy-main {
+    max-width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 3s;
+}
+
+#slothy-main.show {
+    opacity: 1;
+}
+
+
 
 
 
@@ -119,6 +133,9 @@ body {
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .img-fluid {
         width: 350px;
+    }
+    #slothy-main {
+        max-width: 50%; /* Adjust size as needed */
     }
 }
 
