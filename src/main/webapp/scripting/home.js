@@ -11,7 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(typeWriter, speed);
         }else{
             const welcomeText = document.querySelector('.welcome-text');
-            welcomeText.classList.add('show')
+            welcomeText.classList.add('show');
+            //show the button and event list after the animation
+            const addButton = document.getElementById('add-event-button');
+            const eventsContainer = document.querySelector('.events-container');
+            setTimeout(() => {
+                addButton.classList.add('show');
+                eventsContainer.classList.add('show');
+            }, 1000);
         }
     }
     typeWriter();

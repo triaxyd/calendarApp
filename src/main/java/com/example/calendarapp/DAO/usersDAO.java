@@ -28,7 +28,7 @@ public class usersDAO {
     }
 
 
-    public static void createUser(String username, String password, int age) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+    public static boolean createUser(String username, String password, int age) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
         // create new User object
         // create new user id
         // store user information to database
@@ -40,6 +40,10 @@ public class usersDAO {
         String passwordString = Arrays.toString(hashedPassword);
 
         user = new User(username,passwordString,age,saltString);
+
+        //save user to database
+
+        return true;
 
 
     }
