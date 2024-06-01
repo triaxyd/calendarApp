@@ -8,16 +8,16 @@ public class Event {
     private LocalDate eventDate;
     private int eventDuration;
     private String eventDescription;
-    private final String username;
+    private final String creatorUsername;
     private boolean isPublic;
 
-    public Event(int eventId, String eventName, LocalDate eventDate, int eventDuration, String eventDescription,String username, boolean isPublic) {
+    public Event(String eventName, LocalDate eventDate, int eventDuration, String eventDescription, String creatorUsername, boolean isPublic) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventDuration = eventDuration;
         this.eventDescription = eventDescription;
-        this.username = username;
+        this.creatorUsername = creatorUsername;
         this.isPublic = isPublic;
     }
 
@@ -41,8 +41,8 @@ public class Event {
         return this.eventDescription;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getCreatorUsername() {
+        return this.creatorUsername;
     }
 
     public boolean isPublic() {

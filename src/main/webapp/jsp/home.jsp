@@ -1,4 +1,11 @@
 <%@ page import="java.time.LocalDate" %>
+<%
+    if (session == null || session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        return;
+    }
+    String username = session.getAttribute("username").toString();
+%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +23,7 @@
 </head>
 <body>
 <main class="container-fluid">
-    <input type="hidden" id="usernameHidden" value="<%=session.getAttribute("username")%>">
+    <input type="hidden" id="usernameHidden" value="<%=username%>">
     <div class="row justify-content-center align-items-center">
         <div class="col-lg-6 col-md-8 col-sm-10">
             <div class="welcome-text hidden text-center">

@@ -2,12 +2,12 @@ package com.example.calendarapp.calendar;
 
 public class Comment {
     private final String username;
-    private final int commentId;
+    private final int eventId;
     private String comment;
 
-    public Comment(String creatorUsername, int commentId, String comment) {
+    public Comment(String creatorUsername, int eventId, String comment) {
         this.username = creatorUsername;
-        this.commentId = commentId;
+        this.eventId = eventId;
         this.comment = comment;
     }
 
@@ -15,8 +15,8 @@ public class Comment {
         return username;
     }
 
-    public int getCommentId() {
-        return commentId;
+    public int getEventId() {
+        return eventId;
     }
 
 

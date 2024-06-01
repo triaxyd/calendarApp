@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 
         if (usersDAO.validateUser(username, password)) {
             HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(600);
             session.setAttribute("username", username);
 
             //authentication process

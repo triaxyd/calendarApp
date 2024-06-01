@@ -21,6 +21,4 @@ public class User {
     public void setPassword(String password) {this.password = password;}
     public void setAge(int age) {this.age = age;}
     public void setSalt(String salt) {this.salt = salt;}
-
-
 }

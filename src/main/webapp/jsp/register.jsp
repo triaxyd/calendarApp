@@ -19,15 +19,15 @@
             <h1 class="display-4">Welcome to Slothy!</h1>
             <h2 class="display-5">Create Account</h2>
         </div>
-        <form id="register-form" method="post" action="register-servlet" class="mt-5 text-center">
+        <form id="register-form" method="post" action="${pageContext.request.contextPath}/register-servlet" class="mt-5 text-center">
             <div class="mb-4">
-                <input type="text" id="usernameField" class="form-control" placeholder="Enter a Username" maxlength="12">
+                <input type="text" id="usernameField" name="usernameField" class="form-control" placeholder="Enter a Username" maxlength="20" required>
             </div>
             <div class="mb-4">
-                <input type="password" id="passwordField" class="form-control" placeholder="Enter a Password" maxlength="20">
+                <input type="password" id="passwordField" name="passwordField" class="form-control" placeholder="Enter a Password" maxlength="20" required>
             </div>
             <div class="mb-4">
-                <input type="number" id="ageField" class="form-control" placeholder="Enter your Age" min="15" max="99">
+                <input type="number" id="ageField" name="ageField" class="form-control" placeholder="Enter your Age" min="15" max="99" required>
             </div>
             <button type="submit" class="arrow-circle-btn" id="submitBtn">
                 <span class="arrow"></span>

@@ -98,6 +98,9 @@ body {
     height: auto;
     opacity: 0;
     transition: opacity 3s;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 #slothy-main.show {

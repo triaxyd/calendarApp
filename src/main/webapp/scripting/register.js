@@ -15,7 +15,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     let isValid = true;
     let usernameField = document.getElementById("usernameField").value;
     let passwordField = document.getElementById("passwordField").value;
-    let ageField = document.getElementById("ageField").value;
+    let emailField = document.getElementById("ageField").value;
 
 
     if (usernameField.trim() === '' || usernameField.length < 5 || usernameField.length > 12) {
@@ -27,7 +27,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         isValid = false;
     }
 
-    if (ageField.trim() === '' || ageField < 10) {
+    if (emailField.trim() === '' || emailField < 10) {
         isValid = false;
     }
 
