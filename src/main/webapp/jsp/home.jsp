@@ -72,6 +72,7 @@
     <div class="row mt-5 position-absolute w-100" style="bottom: 0;">
         <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 text-center">
             <img src="../images/slothyText.png" class="img-fluid" id="slothy-main" alt="Slothy Image">
+            <div class="copyright">© 2024 3Des. All rights reserved.</div>
         </div>
     </div>
 </main>
@@ -121,10 +122,12 @@
     const username = $('#usernameHidden').val();
     const contextPath = '<%= request.getContextPath() %>';
 
+
     //clear the form fields
     function clearForm() {
         $('#eventForm').trigger('reset');
         $('#participantUsernamesField').hide();
+        $('#eventIsPublic').prop('checked', false);
     }
 
     //load events function that sorts the events of a user
@@ -164,6 +167,11 @@
 
     //when document is ready
     $(document).ready(function () {
+
+
+        window.onbeforeunload = function() {
+            clearForm();
+        };
 
         //clear the modal
         $('#eventModal').on('hidden.bs.modal', function () {
