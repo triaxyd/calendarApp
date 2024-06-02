@@ -1,17 +1,29 @@
 package com.example.calendarapp.calendar;
 
-import java.time.LocalDate;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Event {
     private int eventId;
     private String eventName;
-    private LocalDate eventDate;
+    private Timestamp eventDate;
     private int eventDuration;
     private String eventDescription;
     private final String creatorUsername;
     private boolean isPublic;
 
-    public Event(String eventName, LocalDate eventDate, int eventDuration, String eventDescription, String creatorUsername, boolean isPublic) {
+    public Event(String eventName, Timestamp eventDate, int eventDuration, String eventDescription, String creatorUsername, boolean isPublic) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventDuration = eventDuration;
+        this.eventDescription = eventDescription;
+        this.creatorUsername = creatorUsername;
+        this.isPublic = isPublic;
+    }
+
+    public Event(int eventId, String eventName, Timestamp eventDate, int eventDuration, String eventDescription, String creatorUsername, boolean isPublic) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -29,7 +41,7 @@ public class Event {
         return this.eventName;
     }
 
-    public LocalDate getEventDate() {
+    public Timestamp getEventDate() {
         return this.eventDate;
     }
 
@@ -57,7 +69,7 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public void setEventDate(LocalDate eventDate) {
+    public void setEventDate(Timestamp eventDate) {
         this.eventDate = eventDate;
     }
 

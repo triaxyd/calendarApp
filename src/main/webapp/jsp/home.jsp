@@ -23,7 +23,7 @@
 </head>
 <body>
 <main class="container-fluid">
-    <input type="hidden" id="usernameHidden" value="<%=username%>">
+    <input type="hidden" id="usernameHidden" name="usernameHidden" value="<%=username%>">
     <div class="row justify-content-center align-items-center">
         <div class="col-lg-6 col-md-8 col-sm-10">
             <div class="welcome-text hidden text-center">
@@ -85,10 +85,6 @@
             <div class="modal-body">
                 <form id="eventForm">
                     <div class="mb-3">
-                        <label for="eventId" class="form-label">Event ID</label>
-                        <input type="number" class="form-control" id="eventId" name="eventId" min="0" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="eventName" class="form-label">Event Name</label>
                         <input type="text" class="form-control" id="eventName" name="eventName" required>
                     </div>
@@ -108,7 +104,11 @@
                         <input type="checkbox" class="form-check-input" id="eventIsPublic" name="eventIsPublic">
                         <label class="form-check-label" for="eventIsPublic">Public Event</label>
                     </div>
-                    <button type="button" class="btn btn-primary" style="background: #927C67; border:none;" onclick="createEvent()">Create Event</button>
+                    <div class="mb-3" id="participantUsernamesField" style="display: none;">
+                        <label for="participantUsernames" class="form-label">Participant Usernames</label>
+                        <input type="text" class="form-control" id="participantUsernames" name="participantUsernames" placeholder="Enter usernames separated by commas">
+                    </div>
+                    <button type="button" class="btn btn-primary" style="background: #927C67; border:none;" onclick="createNewEvent()">Create Event</button>
                 </form>
             </div>
         </div>
@@ -118,39 +118,127 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../scripting/home.js"></script>
 <script>
+    const username = $('#usernameHidden').val();
+    const contextPath = '<%= request.getContextPath() %>';
+
+    //clear the form fields
+    function clearForm() {
+        $('#eventForm').trigger('reset');
+        $('#participantUsernamesField').hide();
+    }
+
+    //load events function that sorts the events of a user
+    function loadEvents(){
+        //asynchronous call to loadEventServlet
+        $.ajax({
+            url: contextPath + '/load-events-servlet',
+            type: 'GET',
+            data: { username: username },
+            success: function(response) {
+                //if success, empty possible events and display them sorted
+                console.log("Events loaded successfully:", response);
+                $('#eventsContainer').empty();
+
+                //sorting the array
+                response.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+
+                //for each event, create an event div view
+                response.forEach(function(event) {
+                    var formattedDate = new Date(event.eventDate).toLocaleString('en-GB', {
+                        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }).replace(',', ' at');
+                    $('#eventsContainer').append(
+                        '<div class="card event-item">' +
+                        '<div class="event-date">' + formattedDate + '</div>' +
+                        '<div class="event-name">' + event.eventName + '</div>' +
+                        '</div>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading events:', error);
+            }
+        });
+    }
+
+
+    //when document is ready
     $(document).ready(function () {
-        window.createEvent = function () {
-            var eventId = $('#eventId').val();
+
+        //clear the modal
+        $('#eventModal').on('hidden.bs.modal', function () {
+            clearForm();
+        });
+
+        //load the events of the user
+        loadEvents();
+
+
+        //if checkbox isPublic is clicked, show and hide participants accordingly
+        $('#eventIsPublic').change(function() {
+            if (this.checked) {
+                $('#participantUsernamesField').show();
+            } else {
+                $('#participantUsernamesField').hide();
+                $('#participantUsernames').val('');
+            }
+        });
+
+
+        //creating new event with call to servlet
+        window.createNewEvent = function () {
             var eventName = $('#eventName').val();
             var eventDate = $('#eventDate').val();
+            var eventDuration = $('#eventDuration').val();
             var eventDescription = $('#eventDescription').val();
             var eventUsername = $('#usernameHidden').val();
-            var eventIsPublic = $('#eventIsPublic').val();
+            var eventIsPublic = $('#eventIsPublic').is(':checked');
+            var participantUsernames = eventIsPublic ? $('#participantUsernames').val() : null;
 
+            console.log("Creating event with details:", {
+                eventName, eventDate, eventDescription, eventUsername, eventIsPublic, participantUsernames
+            });
+
+            //asynchronous call to createEventServlet
             $.ajax({
-                url: '/createEvent',
+                url: contextPath + '/create-event-servlet',
                 type: 'POST',
                 data: {
                     eventName: eventName,
-                    eventDate: eventDate
+                    eventDate: eventDate,
+                    eventDuration: eventDuration,
+                    eventDescription: eventDescription,
+                    creatorUsername: eventUsername,
+                    eventIsPublic: eventIsPublic,
+                    eventParticipants: participantUsernames
                 },
-                success: function(response) {
+                success: function() {
+                    //if event created, clear the modal and load the events again
+                    clearForm();
+                    loadEvents();
+                    /*
+                    var formattedDate = new Date(eventDate).toLocaleString('en-GB', {
+                        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }).replace(',', ' at');
                     $('#eventsContainer').append(
                         '<div class="card event-item">' +
-                        '<div class="event-date">' + response.eventDate + '</div>' +
-                        '<div class="event-name">' + response.eventName + '</div>' +
+                        '<div class="event-date">' + formattedDate + '</div>' +
+                        '<div class="event-name">' + eventName + '</div>' +
                         '</div>'
-                    );
+                    );*/
 
+                    //hide the modal automatically
                     $('#eventModal').modal('hide');
                 },
                 error: function(xhr, status, error) {
+                    //display error in console if event wasnt created
                     console.error('Error creating event:', error);
                 }
             });
         };
     });
 </script>
+
 
 </body>
 </html>
