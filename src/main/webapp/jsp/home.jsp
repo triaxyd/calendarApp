@@ -124,10 +124,15 @@
                 //for each event, create an event div view
                 response.forEach(function(event) {
                     var formattedDate = new Date(event.eventDate).toLocaleString('en-GB', {
-                        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
                     }).replace(',', ' at');
+
                     $('#eventsContainer').append(
-                        '<div class="card event-item">' +
+                        '<div class="card event-item" id="' + event.eventId + '">' +
                         '<div class="event-date">' + formattedDate + '</div>' +
                         '<div class="event-name">' + event.eventName + '</div>' +
                         '</div>'
