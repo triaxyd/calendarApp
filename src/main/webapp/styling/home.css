@@ -85,11 +85,13 @@ input[type="checkbox"]:checked {
     top: 7rem;
     opacity: 0;
     transition: opacity 1s;
+    pointer-events: none;
 
 }
 
 #add-event-button.show{
     opacity: 1;
+    pointer-events: auto;
 }
 
 #add-event-button:hover {
@@ -109,6 +111,7 @@ input[type="checkbox"]:checked {
     scrollbar-width: none;
     opacity: 0;
     transition: opacity 1s;
+    pointer-events: none;
 }
 
 .events-container.show {
@@ -116,6 +119,7 @@ input[type="checkbox"]:checked {
     padding:0rem 1rem;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(30, 50, 40, 0.3);
+    pointer-events: auto;
 }
 
 .events-container::-webkit-scrollbar {
@@ -149,6 +153,14 @@ input[type="checkbox"]:checked {
 .event-date{
     font-size: 0.8rem;
     color: #927C67;
+}
+
+.event-name{
+    font-size: 1.2rem;
+    color: #222222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

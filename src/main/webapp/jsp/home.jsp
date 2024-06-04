@@ -40,32 +40,8 @@
 
     <div class="events-container" id="eventsContainer">
         <div class="card event-item">
-            <div class="event-date">2024-06-01</div>
-            <div class="event-name">Go shopping</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-02</div>
-            <div class="event-name">Team Call</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-03</div>
-            <div class="event-name">Take out Trash</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-04</div>
-            <div class="event-name">See despoinio</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-05</div>
-            <div class="event-name">Walk the dog</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-06</div>
-            <div class="event-name">Climb Tree</div>
-        </div>
-        <div class="card event-item">
-            <div class="event-date">2024-06-07</div>
-            <div class="event-name">Visit paradise</div>
+            <div class="event-date">Event Date</div>
+            <div class="event-name">Event Name ~ Events did not load properly</div>
         </div>
     </div>
 
