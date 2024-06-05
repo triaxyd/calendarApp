@@ -147,7 +147,10 @@ input[type="checkbox"]:checked {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
     cursor: pointer;
-    background: #BDCEB6;
+    /*background: #BDCEB6; */
+    background: #DFEFD8;
+
+
 }
 
 .event-date{
