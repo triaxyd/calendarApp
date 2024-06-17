@@ -35,7 +35,7 @@ public class CreateEventServlet extends HttpServlet {
         }
         int eventDuration = Integer.parseInt(eventDurationString);
         boolean isPublic = Boolean.parseBoolean(isPublicString);
-        String[] participants = eventParticipantsString.split(",");
+        //String[] participants = eventParticipantsString.split(",");
 
         boolean eventAdded = eventsDAO.addEvent(eventName, eventDate, eventDuration, eventDescription, creatorUsername, isPublic);
 

@@ -7,6 +7,11 @@ import java.util.Date;
 
 public class eventsDAO {
 
+
+    public static Event getEvent(int eventId){
+        return null;
+    }
+
     public static List<Event> getEventsForUser(String creatorUsername) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -57,6 +62,12 @@ public class eventsDAO {
         return events;
     }
 
+    public static List<Event> getPublicEventsForUser(String creatorUsername) {
+        String sql = "SELECT e.eventId FROM event AS e JOIN participant AS p ON e.eventId = p.eventId WHERE p.username = ?";
+        return null;
+
+    }
+
 
     public static boolean addEvent(String eventName, Timestamp eventDate, int eventDuration, String eventDescription, String username, boolean isPublic){
         Event event = new Event(eventName,eventDate,eventDuration,eventDescription,username,isPublic);
@@ -88,5 +99,32 @@ public class eventsDAO {
             }
         }
     }
+
+    public static boolean deleteEvent(int eventId){
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DatabaseConnector.connect();
+            String sql = "DELETE FROM event WHERE eventId = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, eventId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

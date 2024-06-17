@@ -66,11 +66,11 @@
                         <input type="text" class="form-control" id="eventName" name="eventName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="eventDate" class="form-label">Date</label>
+                        <label for="eventDate" class="form-label">Starting Date</label>
                         <input type="datetime-local" class="form-control" id="eventDate" name="eventDate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="eventDuration" class="form-label">Duration</label>
+                        <label for="eventDuration" class="form-label">Duration (minutes)</label>
                         <input type="number" class="form-control" id="eventDuration" name="eventDuration" min="5" required>
                     </div>
                     <div class="mb-3">
@@ -99,12 +99,15 @@
     const contextPath = '<%= request.getContextPath() %>';
 
 
+
     //clear the form fields
     function clearForm() {
         $('#eventForm').trigger('reset');
         $('#participantUsernamesField').hide();
         $('#eventIsPublic').prop('checked', false);
     }
+
+
 
     //load events function that sorts the events of a user
     function loadEvents(){
@@ -173,17 +176,80 @@
 
 
 
+    //creating new event with call to servlet
+    function createNewEvent(){
+        var eventName = $('#eventName').val();
+        var eventDate = $('#eventDate').val();
+        var eventDuration = $('#eventDuration').val();
+        var eventDescription = $('#eventDescription').val();
+        var eventUsername = $('#usernameHidden').val();
+        var eventIsPublic = $('#eventIsPublic').is(':checked');
+        var participantUsernames = eventIsPublic ? $('#participantUsernames').val() : null;
+
+        console.log("Creating event with details:", {
+            eventName, eventDate, eventDescription, eventUsername, eventIsPublic, participantUsernames
+        });
+
+        //asynchronous call to createEventServlet
+        $.ajax({
+            url: contextPath + '/create-event-servlet',
+            type: 'POST',
+            data: {
+                eventName: eventName,
+                eventDate: eventDate,
+                eventDuration: eventDuration,
+                eventDescription: eventDescription,
+                creatorUsername: eventUsername,
+                eventIsPublic: eventIsPublic,
+                eventParticipants: participantUsernames
+            },
+            success: function() {
+                //if event created, clear the modal and load the events again
+                clearForm();
+                loadEvents();
+
+                //hide the modal automatically
+                $('#eventModal').modal('hide');
+            },
+            error: function(xhr, status, error) {
+                //display error in console if event wasnt created
+                console.error('Error creating event:', error);
+            }
+        });
+    }
+
+
+
     function editEvent(eventId) {
         console.log("Edit event with ID:", eventId);
     }
 
+
+
     function deleteEvent(eventId) {
         console.log("Delete event with ID:", eventId);
+
+        //asynchronous call to deleteEventServlet
+        $.ajax({
+            url: contextPath + '/delete-event-servlet',
+            type: 'POST',
+            data: { eventId: eventId },
+            success: function(response) {
+                //if success, display response message
+                console.log("Events deleted successfully:", response);
+                loadEvents();
+
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading events:', error);
+            }
+        });
     }
+
+
 
     //when document is ready
     $(document).ready(function () {
-
 
         window.onbeforeunload = function() {
             clearForm();
@@ -197,7 +263,6 @@
         //load the events of the user
         loadEvents();
 
-
         //if checkbox isPublic is clicked, show and hide participants accordingly
         $('#eventIsPublic').change(function() {
             if (this.checked) {
@@ -207,59 +272,6 @@
                 $('#participantUsernames').val('');
             }
         });
-
-
-        //creating new event with call to servlet
-        window.createNewEvent = function () {
-            var eventName = $('#eventName').val();
-            var eventDate = $('#eventDate').val();
-            var eventDuration = $('#eventDuration').val();
-            var eventDescription = $('#eventDescription').val();
-            var eventUsername = $('#usernameHidden').val();
-            var eventIsPublic = $('#eventIsPublic').is(':checked');
-            var participantUsernames = eventIsPublic ? $('#participantUsernames').val() : null;
-
-            console.log("Creating event with details:", {
-                eventName, eventDate, eventDescription, eventUsername, eventIsPublic, participantUsernames
-            });
-
-            //asynchronous call to createEventServlet
-            $.ajax({
-                url: contextPath + '/create-event-servlet',
-                type: 'POST',
-                data: {
-                    eventName: eventName,
-                    eventDate: eventDate,
-                    eventDuration: eventDuration,
-                    eventDescription: eventDescription,
-                    creatorUsername: eventUsername,
-                    eventIsPublic: eventIsPublic,
-                    eventParticipants: participantUsernames
-                },
-                success: function() {
-                    //if event created, clear the modal and load the events again
-                    clearForm();
-                    loadEvents();
-                    /*
-                    var formattedDate = new Date(eventDate).toLocaleString('en-GB', {
-                        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                    }).replace(',', ' at');
-                    $('#eventsContainer').append(
-                        '<div class="card event-item">' +
-                        '<div class="event-date">' + formattedDate + '</div>' +
-                        '<div class="event-name">' + eventName + '</div>' +
-                        '</div>'
-                    );*/
-
-                    //hide the modal automatically
-                    $('#eventModal').modal('hide');
-                },
-                error: function(xhr, status, error) {
-                    //display error in console if event wasnt created
-                    console.error('Error creating event:', error);
-                }
-            });
-        };
     });
 </script>
 
