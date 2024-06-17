@@ -135,6 +135,7 @@ input[type="checkbox"]:checked {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     */
+    position: relative;
     background: rgba(255,255,255,0.9);
     margin: 0.75rem 0;
     padding: 0.75rem;
@@ -146,15 +147,12 @@ input[type="checkbox"]:checked {
 .event-item:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-    cursor: pointer;
     /*background: #BDCEB6; */
     background: #DFEFD8;
-
-
 }
 
 .event-date{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #927C67;
 }
 
@@ -165,6 +163,42 @@ input[type="checkbox"]:checked {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.event-description {
+    font-size: 0.8rem;
+    color: #777777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-isPublic {
+    font-size: 0.8rem;
+    color: #777777;
+}
+
+.edit-event-icon {
+    margin-right: 1.5rem;
+}
+
+.edit-event-icon,
+.delete-event-icon {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    vertical-align: middle;
+    cursor: pointer;
+    fill: #555;
+    margin-left: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.event-item:hover .edit-event-icon,
+.event-item:hover .delete-event-icon {
+    opacity: 1;
+}
+
 
 
 #slothy-main {
