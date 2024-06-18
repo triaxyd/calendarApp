@@ -1,6 +1,7 @@
 package com.example.calendarapp.servlets;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.calendarapp.DAO.eventsDAO;
@@ -19,9 +20,16 @@ public class LoadEventsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         List<Event> events = eventsDAO.getEventsForUser(username);
+        List<Event> publicEvents = eventsDAO.getPublicEventsForUser(username);
+
+        //merge the 2 lists
+        List<Event> allUserEvents = new ArrayList<>();
+        allUserEvents.addAll(events);
+        allUserEvents.addAll(publicEvents);
+
 
         Gson gson = new Gson();
-        String jsonResponse = gson.toJson(events);
+        String jsonResponse = gson.toJson(allUserEvents);
 
 
         response.setContentType("application/json");

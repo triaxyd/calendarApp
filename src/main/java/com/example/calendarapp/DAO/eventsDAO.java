@@ -80,6 +80,7 @@ public class eventsDAO {
                 Event event = new Event(eventId, eventName, eventDate, eventDuration, eventDescription, creatorUsername, isPublic);
                 events.add(event);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -109,14 +110,58 @@ public class eventsDAO {
     }
 
 
-    /*
-    public static List<Event> getPublicEventsForUser(String creatorUsername) {
-        String sql = "SELECT e.eventId FROM event AS e JOIN participant AS p ON e.eventId = p.eventId WHERE p.username = ?";
-        return null;
 
+    public static List<Event> getPublicEventsForUser(String username) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Event> events = new ArrayList<>();
+        try {
+            connection = DatabaseConnector.connect();
+            String sql = "SELECT e.eventId FROM event AS e JOIN participant AS p ON e.eventId = p.eventId WHERE p.username = ? AND e.creatorUsername != ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, username);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                //get the eventId returned
+                int eventId = resultSet.getInt("eventId");
+                //find the event using the getEvent() method and add it to the events list
+                events.add(getEvent(eventId));
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return events;
     }
 
-     */
+
 
 
     public static int addEvent(String eventName, Timestamp eventDate, int eventDuration, String eventDescription, String username, boolean isPublic) {

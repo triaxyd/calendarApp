@@ -192,7 +192,7 @@
 
                     let duration = formattedStartDate + ' - ' + formattedEndDate;
 
-                    let isPublic = event.isPublic ? "Public Event" : "Private Event";
+                    let isPublic = event.isPublic ? "Public Event by " + event.creatorUsername : "Private Event";
 
 
                     $('#eventsContainer').append(
