@@ -118,7 +118,7 @@ input[type="checkbox"]:checked {
     opacity: 0.95;
     padding:0rem 1rem;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(30, 50, 40, 0.3);
+    /*box-shadow: 0px 0px 20px rgba(30, 50, 40, 0.3);*/
     pointer-events: auto;
 }
 
@@ -127,17 +127,10 @@ input[type="checkbox"]:checked {
 }
 
 .event-item {
-    /*
-    background: #ffffff;
-    margin: 0.75rem 0;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    */
     position: relative;
     background: rgba(255,255,255,0.9);
-    margin: 0.75rem 0;
+    /*margin: 0.75rem 0;*/
+    margin: 1rem 0;
     padding: 0.75rem;
     border-radius: 10px;
     box-shadow: 0 0px 5px 2px rgba(0, 0, 0, 0.1);
@@ -147,13 +140,16 @@ input[type="checkbox"]:checked {
 .event-item:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-    /*background: #BDCEB6; */
     background: #DFEFD8;
+    /*cursor: cell;*/
 }
 
 .event-date{
     font-size: 0.9rem;
     color: #927C67;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 .event-name{
@@ -162,20 +158,34 @@ input[type="checkbox"]:checked {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
-.event-description {
+.event-description,
+.event-isPublic{
+    display: none;
+    opacity: 0;
     font-size: 0.8rem;
     color: #777777;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    height: 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
 }
 
-.event-isPublic {
-    font-size: 0.8rem;
-    color: #777777;
+.event-item.expanded .event-description,
+.event-item.expanded .event-isPublic {
+    display: block;
+    opacity: 1;
+    height: auto;
 }
+
 
 .edit-event-icon {
     margin-right: 1.5rem;

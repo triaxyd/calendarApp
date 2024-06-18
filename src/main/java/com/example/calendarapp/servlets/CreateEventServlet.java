@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.example.calendarapp.DAO.eventsDAO;
+import com.example.calendarapp.DAO.participantsDAO;
 import com.google.gson.JsonObject;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -37,18 +38,36 @@ public class CreateEventServlet extends HttpServlet {
         boolean isPublic = Boolean.parseBoolean(isPublicString);
         //String[] participants = eventParticipantsString.split(",");
 
-        boolean eventAdded = eventsDAO.addEvent(eventName, eventDate, eventDuration, eventDescription, creatorUsername, isPublic);
+        //eventsDAO access the database and create new event tuple,
+        //return the eventId created which is auto incremented and >=0
+        int eventIdCreated = eventsDAO.addEvent(eventName, eventDate, eventDuration, eventDescription, creatorUsername, isPublic);
+
+        //if the event was created successfully
+        //participantDAO access the database and create a new participant tuple for creator
+        if (eventIdCreated >= 0){
+            participantsDAO.addParticipantToEvent(eventIdCreated, creatorUsername);
+        }
+
+        String[] participantUsernames;
+        if(isPublic && eventParticipantsString!=null && !eventParticipantsString.isEmpty()){
+            participantUsernames = eventParticipantsString.split(",");
+            for (String participantUsername : participantUsernames) {
+                //call participantsDAO to add other participants
+                participantsDAO.addParticipantToEvent(eventIdCreated, participantUsername.trim());
+            }
+        }
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
         JsonObject jsonResponse = new JsonObject();
-        if (eventAdded) {
+
+
+        if (eventIdCreated >= 0) {
             jsonResponse.addProperty("success", true);
-            jsonResponse.addProperty("message", "Event created successfully");
+            jsonResponse.addProperty("message", "Created Event " + eventIdCreated);
         } else {
             jsonResponse.addProperty("success", false);
-            jsonResponse.addProperty("message", "Event could not be created");
+            jsonResponse.addProperty("message", "Event could not be created" + eventIdCreated);
         }
 
         response.getWriter().write(jsonResponse.toString());

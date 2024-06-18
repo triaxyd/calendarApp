@@ -30,6 +30,11 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        username = username.trim();
+        username = username.replace(" ","");
+        password = password.trim();
+        password = password.replace(" ","");
+
         try {
             ageInt = Integer.parseInt(age);
         } catch (NumberFormatException e) {

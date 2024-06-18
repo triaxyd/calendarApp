@@ -52,6 +52,7 @@
         </div>
     </div>
 </main>
+
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -94,17 +95,60 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../scripting/home.js"></script>
+
 <script>
     const username = $('#usernameHidden').val();
     const contextPath = '<%= request.getContextPath() %>';
-
-
 
     //clear the form fields
     function clearForm() {
         $('#eventForm').trigger('reset');
         $('#participantUsernamesField').hide();
         $('#eventIsPublic').prop('checked', false);
+    }
+
+
+
+    //creating new event with call to servlet
+    function createNewEvent(){
+        var eventName = $('#eventName').val();
+        var eventDate = $('#eventDate').val();
+        var eventDuration = $('#eventDuration').val();
+        var eventDescription = $('#eventDescription').val();
+        var eventUsername = $('#usernameHidden').val();
+        var eventIsPublic = $('#eventIsPublic').is(':checked');
+        var participantUsernames = eventIsPublic ? $('#participantUsernames').val() : null;
+
+        console.log("Creating event with details:", {
+            eventName, eventDate, eventDescription, eventUsername, eventIsPublic, participantUsernames
+        });
+
+        //asynchronous call to createEventServlet
+        $.ajax({
+            url: contextPath + '/create-event-servlet',
+            type: 'POST',
+            data: {
+                eventName: eventName,
+                eventDate: eventDate,
+                eventDuration: eventDuration,
+                eventDescription: eventDescription,
+                creatorUsername: eventUsername,
+                eventIsPublic: eventIsPublic,
+                eventParticipants: participantUsernames
+            },
+            success: function() {
+                //if event created, clear the modal and load the events again
+                clearForm();
+                loadEvents();
+
+                //hide the modal automatically
+                $('#eventModal').modal('hide');
+            },
+            error: function(xhr, status, error) {
+                //display error in console if event wasnt created
+                console.error('Error creating event:', error);
+            }
+        });
     }
 
 
@@ -160,60 +204,33 @@
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen edit-event-icon" viewBox="0 0 16 16" onclick="editEvent(' + event.eventId + ')">' +
                         '<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>' +
                         '</svg>' +
+                        //'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg delete-event-icon" viewBox="0 0 16 16" onclick="deleteEvent(' + event.eventId + ')">' +
+                        //'<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>' +
+                        //'<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>' +
+                        //'</svg>' +
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash delete-event-icon" viewBox="0 0 16 16" onclick="deleteEvent(' + event.eventId + ')">' +
-                        '<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>' +
-                        '<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>' +
+                        '<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>' +
                         '</svg>' +
                         '</div>'
                     );
                 });
+
+                //add click event expand details
+                $('.event-item').on('click', function() {
+                    //check if the clicked event is already expanded
+                    const isAlreadyExpanded = $(this).hasClass('expanded');
+
+                    //remove the expanded class from all event items
+                    $('.event-item').removeClass('expanded');
+
+                    //if the clicked event was not already expanded, expand it
+                    if (!isAlreadyExpanded) {
+                        $(this).addClass('expanded');
+                    }
+                });
             },
             error: function(xhr, status, error) {
                 console.error('Error loading events:', error);
-            }
-        });
-    }
-
-
-
-    //creating new event with call to servlet
-    function createNewEvent(){
-        var eventName = $('#eventName').val();
-        var eventDate = $('#eventDate').val();
-        var eventDuration = $('#eventDuration').val();
-        var eventDescription = $('#eventDescription').val();
-        var eventUsername = $('#usernameHidden').val();
-        var eventIsPublic = $('#eventIsPublic').is(':checked');
-        var participantUsernames = eventIsPublic ? $('#participantUsernames').val() : null;
-
-        console.log("Creating event with details:", {
-            eventName, eventDate, eventDescription, eventUsername, eventIsPublic, participantUsernames
-        });
-
-        //asynchronous call to createEventServlet
-        $.ajax({
-            url: contextPath + '/create-event-servlet',
-            type: 'POST',
-            data: {
-                eventName: eventName,
-                eventDate: eventDate,
-                eventDuration: eventDuration,
-                eventDescription: eventDescription,
-                creatorUsername: eventUsername,
-                eventIsPublic: eventIsPublic,
-                eventParticipants: participantUsernames
-            },
-            success: function() {
-                //if event created, clear the modal and load the events again
-                clearForm();
-                loadEvents();
-
-                //hide the modal automatically
-                $('#eventModal').modal('hide');
-            },
-            error: function(xhr, status, error) {
-                //display error in console if event wasnt created
-                console.error('Error creating event:', error);
             }
         });
     }
@@ -233,7 +250,7 @@
         $.ajax({
             url: contextPath + '/delete-event-servlet',
             type: 'POST',
-            data: { eventId: eventId },
+            data: { eventId: eventId, username: username },
             success: function(response) {
                 //if success, display response message
                 console.log("Events deleted successfully:", response);
@@ -245,6 +262,9 @@
             }
         });
     }
+
+
+
 
 
 
