@@ -37,4 +37,10 @@ public class participantsDAO {
         }
     }
 
+    public static boolean deleteParticipantsFromEvent(int eventId){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        return false;
+    }
+
 }

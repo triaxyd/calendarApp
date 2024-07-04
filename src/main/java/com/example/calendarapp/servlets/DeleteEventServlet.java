@@ -1,5 +1,7 @@
 package com.example.calendarapp.servlets;
 
+import com.example.calendarapp.DAO.participantsDAO;
+
 import com.example.calendarapp.DAO.eventsDAO;
 import com.example.calendarapp.calendar.Event;
 import com.google.gson.JsonObject;
@@ -10,6 +12,9 @@ import java.util.Objects;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
+
+
 
 @WebServlet(name = "deleteEventServlet", value = "/delete-event-servlet")
 public class DeleteEventServlet extends HttpServlet {
@@ -39,6 +44,7 @@ public class DeleteEventServlet extends HttpServlet {
 
         //WE FIRST NEED TO DELETE FROM PARTICIPANT AND COMMENTS
 
+        boolean participantDeleted = participantsDAO.deleteParticipantsFromEvent(eventId);
         boolean eventDeleted = eventsDAO.deleteEvent(eventId);
 
         response.setContentType("application/json");
