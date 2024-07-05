@@ -1,11 +1,14 @@
 <%@ page import="java.time.LocalDate" %>
 <%
+    //session check
     if (session == null || session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/index.jsp");
         return;
     }
+    //retrieve username
     String username = session.getAttribute("username").toString();
 %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -27,25 +30,25 @@
     <div class="row justify-content-center align-items-center">
         <div class="col-lg-6 col-md-8 col-sm-10">
             <div class="welcome-text hidden text-center">
-                <h1 class="display-4"><span id="type-writing"></span></h1>
+                <h1 class="display-4"><span id="type-writing"></span></h1> <!----display welcome message in typewriting effect--->
             </div>
         </div>
     </div>
 
-    <button class="btn btn-primary" id="add-event-button" type="button" data-bs-toggle="modal" data-bs-target="#eventModal">
+    <button class="btn btn-primary" id="add-event-button" type="button" data-bs-toggle="modal" data-bs-target="#eventModal"><!----add event button--->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
         </svg>
     </button>
 
-    <div class="events-container" id="eventsContainer">
+    <div class="events-container" id="eventsContainer"><!------events display----->
         <div class="card event-item">
             <div class="event-date">Event Date</div>
             <div class="event-name">Event Name ~ Events did not load properly</div>
         </div>
     </div>
 
-    <div class="row mt-5 position-absolute w-100" style="bottom: 0;">
+    <div class="row mt-5 position-absolute w-100" style="bottom: 0;"><!----slothy logo--->
         <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 text-center">
             <img src="../images/slothyText.png" class="img-fluid" id="slothy-main" alt="Slothy Image">
             <div class="copyright">© 2024 3Des. All rights reserved.</div>
@@ -53,8 +56,8 @@
     </div>
 </main>
 
-<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true"><!-------event addition pop up--------->
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="eventModalLabel">Create New Event</h5>
