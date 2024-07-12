@@ -16,9 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const addButton = document.getElementById('add-event-button');
             const eventsContainer = document.querySelector('.events-container');
             const slothyMain = document.getElementById('slothy-main');
+            const logoutButton = document.querySelector('.logout-container');
+
             setTimeout(() => {
                 addButton.classList.add('show');
                 eventsContainer.classList.add('show');
+                logoutButton.classList.add('show');
             }, 1000);
             setTimeout(() => {
                 slothyMain.classList.add('show');

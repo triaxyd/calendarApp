@@ -1,15 +1,15 @@
 package com.example.calendarapp.users;
 
 public class Participant {
-    private int username;
+    private String username;
     private int eventId;
 
-    public Participant(int username, int eventId) {
+    public Participant(String username, int eventId) {
         this.username = username;
         this.eventId = eventId;
     }
 
-    public int getUsername() {
+    public String getUsername() {
         return this.username;
     }
 

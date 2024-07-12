@@ -1,5 +1,6 @@
 package com.example.calendarapp.servlets;
 
+import com.example.calendarapp.DAO.commentsDAO;
 import com.example.calendarapp.DAO.participantsDAO;
 
 import com.example.calendarapp.DAO.eventsDAO;
@@ -43,15 +44,17 @@ public class DeleteEventServlet extends HttpServlet {
         //boolean participantsDeleted = participantsDAO.deleteEventParticipants()
 
         //WE FIRST NEED TO DELETE FROM PARTICIPANT AND COMMENTS
-
+        //delete comments
         boolean participantDeleted = participantsDAO.deleteParticipantsFromEvent(eventId);
+
+        boolean commentsDeleted= commentsDAO.deleteCommentsByEventId(eventId);
         boolean eventDeleted = eventsDAO.deleteEvent(eventId);
 
         response.setContentType("application/json");
 
 
         JsonObject jsonResponse = new JsonObject();
-        if (eventDeleted) {
+        if (eventDeleted && participantDeleted&& commentsDeleted) {
             jsonResponse.addProperty("success", true);
             jsonResponse.addProperty("message", "Event Deleted successfully");
         } else {

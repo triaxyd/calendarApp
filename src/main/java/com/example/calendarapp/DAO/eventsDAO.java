@@ -207,7 +207,38 @@ public class eventsDAO {
             }
         }
     }
+    public static boolean editEvent(int eventId, String eventName, Timestamp eventDate, int eventDuration, String eventDescription, String username, boolean isPublic) {
+        Event event = new Event(eventName,eventDate,eventDuration,eventDescription,username,isPublic);
 
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DatabaseConnector.connect();
+            String sql = "UPDATE event SET eventName = ?, eventDate = ?, eventDuration = ?, eventDescription = ?, creatorUsername = ?, isPublic = ? WHERE eventId = ?";
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, event.getEventName());
+            preparedStatement.setTimestamp(2, new Timestamp(event.getEventDate().getTime()));
+            preparedStatement.setInt(3, event.getEventDuration());
+            preparedStatement.setString(4, event.getEventDescription());
+            preparedStatement.setString(5, event.getCreatorUsername());
+            preparedStatement.setBoolean(6, isPublic);
+            preparedStatement.setInt(7, eventId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     public static boolean deleteEvent(int eventId){
@@ -235,6 +266,5 @@ public class eventsDAO {
             }
         }
     }
-
 
 }
